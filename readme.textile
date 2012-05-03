@@ -1,5 +1,5 @@
 h1. webkitdragdrop
-h4. (name will be changed, I think)
+h3. (name will be changed, I think)
 
 My try to make this quite usable drag'n'drop library way more usable ...and to
 cleanup the code ab bit.
