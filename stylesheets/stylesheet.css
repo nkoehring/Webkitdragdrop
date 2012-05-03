@@ -245,3 +245,12 @@ a {
 .cf {
   zoom:1;
 }
+
+#drag {
+  width: 200px;
+  border: thick solid green;
+  background: #232;
+}
+#drag p {
+  margin: 1em;
+}
