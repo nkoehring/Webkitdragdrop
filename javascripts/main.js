@@ -1,2 +1,2 @@
-var drag = new webkit_draggable('drag', { revert:true, scroll:false })
+var drag = new webkit_draggable('#drag', { revert:true, scroll:false })
 
