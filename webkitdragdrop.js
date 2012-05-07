@@ -33,17 +33,24 @@ var null_func = function() {}
 
 var Dom = {
   /**
-   * wraps modern DOM search functions to a "jquery alike" one
-   * TODO: scoped search (eg find('.foo', '#wrapper'))
+   * wraps modern DOM search functions to a "jquery alike" one and tries to
+   * optimize for speed via selecting the fastest possible native selector
+   * method
    *
    * @param String needle
-   * @return DOMElement or Null
+   * @param String haystack (aka scope, which is ignored if needle is an id)
+   * @return Node, NodeList or Null
    */
-  find:function(needle) {
+  find:function(needle, haystack) {
+    if (typeof haystack == "undefined" || needle[0] == "#") haystack = document
+    else haystack = this.find(haystack)
+
     if(typeof needle != "string") return needle
-    if(needle[0] == '#') return document.getElementById(needle.slice(1))
-    else if(needle[0] == '.') return document.getElementsByClassName(needle.slice(1))
-    else return document.getElementsByTagName(needle)
+    if(needle[0] == '#') return haystack.getElementById(needle.slice(1))
+    if(needle[0] == '.') return haystack.getElementsByClassName(needle.slice(1))
+    if(needle.indexOf(',', 1) >= 0) return haystack.querySelectorAll(needle)
+    if(needle.match(/^[A-Za-z]+$/)) return haystack.getElementsByTagName(needle)
+    return haystack.querySelector(needle)
   },
 
   //DESCRIPTION
@@ -414,9 +421,7 @@ var webkit_draggable = function(r, ip) {
     var r = this.root
     var rs = r.style
     var t = event.targetTouches[0]
-    if (t == null) {
-      return
-    }
+    if (t == null) return
 
     var curX = t.pageX
     var curY = t.pageY
@@ -430,9 +435,8 @@ var webkit_draggable = function(r, ip) {
     //scroll window
     if (p.scroll) {
       s = this.getScroll(curX, curY)
-      if ((s[0] != 0) || (s[1] != 0)) {
+      if ((s[0] != 0) || (s[1] != 0))
         window.scrollTo(window.scrollX + s[0], window.scrollY + s[1])
-      }
     }
 
     //check droppables
