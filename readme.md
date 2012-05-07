@@ -16,7 +16,7 @@ will be updated with the library.
 ```javascript
   var drag = new webkit_draggable('drag', { revert:true, scroll:false })
   var drag2 = new webkit_draggable('drag2', { revert:true, scroll:false })
-  webkit_drop.add('#drop', { hoverClass:"hovered" })
+  webkit_drop.add('drop', { hoverClass:"hovered" })
 ```
 
 
