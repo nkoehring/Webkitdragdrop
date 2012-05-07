@@ -3,9 +3,9 @@
 #### (name will be changed, I think)
 
 My try to make this quite usable drag'n'drop library way more usable ...and to
-cleanup the code ab bit.
+cleanup the code a bit.
 
-To view it in action, look at http://nkoehring.github.com/Webkitdragdrop/ which
+To see it in action, look at http://nkoehring.github.com/Webkitdragdrop/ which
 will be updated with the library.
 
 
